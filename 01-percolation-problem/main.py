@@ -1,12 +1,12 @@
 import time
 
-from math import *
-from random import *
-from statistics import *
+from math import sqrt
+from random import randint
+from statistics import mean, stdev
 
 
 class UnionFind:
-    def __init__(self, n: int):
+    def __init__(self, n: int) -> None:
         self.n = n
         self.parent = list(range(n))
         self.size = [1] * n
@@ -39,7 +39,7 @@ class UnionFind:
 
 
 class Percolation:
-    def __init__(self, n: int):
+    def __init__(self, n: int) -> None:
         if n <= 0:
             raise ValueError("n must be greater than 0")
 
@@ -58,14 +58,14 @@ class Percolation:
     def _index(self, i: int, j: int) -> int:
         return i * self.n + j
 
-    def _try_union(self, i1: int, j1: int, i2: int, j2: int):
+    def _try_union(self, i1: int, j1: int, i2: int, j2: int) -> None:
         if not self._in_range(i1, j1) or not self._in_range(i2, j2):
             return
 
         if self.grid[i1][j1] and self.grid[i2][j2]:
             self.uf.union(self._index(i1, j1), self._index(i2, j2))
 
-    def open(self, i: int, j: int):
+    def open(self, i: int, j: int) -> None:
         if not self._in_range(i, j):
             raise ValueError("i and j must be in range")
 
@@ -99,7 +99,7 @@ class Percolation:
 
 
 class PercolationStats:
-    def __init__(self, n: int, t: int):
+    def __init__(self, n: int, t: int) -> None:
         if n <= 0:
             raise ValueError("n must be greater than 0")
         if t <= 0:
@@ -107,7 +107,7 @@ class PercolationStats:
 
         self.n = n
         self.t = t
-        self.stats = []
+        self.stats: list[float] = []
 
         for _ in range(t):
             percolation = Percolation(n)
