@@ -7,6 +7,7 @@ public class AStar {
     private Edge[] edgeTo;
     private IndexMinPQ<Double> pq;
 
+    @SuppressWarnings("unused")
     private int s;
     private int t;
 
@@ -45,8 +46,10 @@ public class AStar {
         }
 
         var path = new Stack<Edge>();
-        for (Edge e = edgeTo[t]; e != null; e = edgeTo[e.other(t)]) {
+        int x = t;
+        for (Edge e = edgeTo[t]; e != null; e = edgeTo[x]) {
             path.push(e);
+            x = e.other(x);
         }
         return path;   
     }

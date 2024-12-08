@@ -11,7 +11,7 @@ do_test() {
 
 echo "===== Compile ====="
 
-javac -cp .:../lib/* *.java
+javac -cp ../lib/algs4.jar:. *.java
 
 echo "===== Insertion Sort ====="
 

@@ -34,23 +34,66 @@ public class Map {
         return Utils.dist(C[v].x, C[v].y, C[w].x, C[w].y);
     }
 
-    public void draw() {
+
+    public void draw(String filename) {
         StdDraw.clear();
+        StdDraw.enableDoubleBuffering();
+        StdDraw.setCanvasSize(1000, 500);
+        StdDraw.setXscale(0, 10000);
+        StdDraw.setYscale(0, 5000);
+
+        System.out.println("Drawing vertices...");
+        StdDraw.setPenColor(StdDraw.RED);
+        StdDraw.setPenRadius(0.001);
         for (int i = 0; i < V; i++) {
-            StdDraw.setPenColor(StdDraw.RED);
-            StdDraw.filledCircle(C[i].x, C[i].y, 0.01);
-            StdDraw.setPenColor(StdDraw.BLACK);
+            StdDraw.point(C[i].x, C[i].y);
         }
+
+        System.out.println("Drawing edges...");
+        StdDraw.setPenColor(StdDraw.BLUE);
         for (Edge e : G.edges()) {
-            StdDraw.setPenColor(StdDraw.BLUE);
             int v = e.either();
             int w = e.other(v);
-            double vx = C[v].x / 10000;
-            double vy = C[v].y / 10000;
-            double wx = C[w].x / 10000;
-            double wy = C[w].y / 10000;
-            StdDraw.line(vx, vy, wx, wy);
+            StdDraw.line(C[v].x, C[v].y, C[w].x, C[w].y);
         }
+
         StdDraw.show();
+        StdDraw.save(filename);
+        StdDraw.close();
+    }
+
+    public void draw(Iterable<Edge> edges, String filename) {
+        StdDraw.clear();
+        StdDraw.enableDoubleBuffering();
+        StdDraw.setCanvasSize(1000, 500);
+        StdDraw.setXscale(0, 10000);
+        StdDraw.setYscale(0, 5000);
+
+        System.out.println("Drawing other vertices...");
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.setPenRadius(0.001);
+        for (int i = 0; i < V; i++) {
+            StdDraw.point(C[i].x, C[i].y);
+        }
+
+        System.out.println("Drawing other edges...");
+        StdDraw.setPenColor(StdDraw.GRAY);
+        for (Edge e : G.edges()) {
+            int v = e.either();
+            int w = e.other(v);
+            StdDraw.line(C[v].x, C[v].y, C[w].x, C[w].y);
+        }
+
+        System.out.println("Drawing shortest path...");
+        StdDraw.setPenColor(StdDraw.RED);
+        for (Edge e : edges) {
+            int v = e.either();
+            int w = e.other(v);
+            StdDraw.line(C[v].x, C[v].y, C[w].x, C[w].y);
+        }
+
+        StdDraw.show();
+        StdDraw.save(filename);
+        StdDraw.close();
     }
 }
