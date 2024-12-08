@@ -63,6 +63,11 @@ public class Map {
     }
 
     public void draw(Iterable<Edge> edges, String filename) {
+        if (edges == null) {
+            System.out.println("No edges to draw");
+            return;
+        }
+
         StdDraw.clear();
         StdDraw.enableDoubleBuffering();
         StdDraw.setCanvasSize(1000, 500);
