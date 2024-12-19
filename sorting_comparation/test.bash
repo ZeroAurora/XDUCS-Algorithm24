@@ -1,3 +1,5 @@
+JAVA_OPTS="-Xmx1G -Xms1G -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -cp ../lib/algs4.jar:."
+
 do_test() {
     echo "$2 Numbers"
 
@@ -5,7 +7,7 @@ do_test() {
 
     for i in {1..10}
     do
-        java -cp .:../lib/* DataGenerator $2 | java -cp .:../lib/* $1
+        java $JAVA_OPTS DataGenerator $2 | java $JAVA_OPTS $1
     done
 }
 
