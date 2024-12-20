@@ -17,7 +17,6 @@ class MapRouting {
         for (int i = 0; i < n; i++) {
             map.addEdge(in.readInt(), in.readInt());
         }
-        map.draw("map.png");
 
         var qin = new In("query.txt");
         while (!qin.isEmpty()) {
