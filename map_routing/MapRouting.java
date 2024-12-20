@@ -19,21 +19,25 @@ class MapRouting {
         }
         map.draw("map.png");
 
-        var stdin = new In();
-        int q = stdin.readInt();
-        for (int i = 0; i < q; i++) {
-            var s = stdin.readInt();
-            var t = stdin.readInt();
+        var qin = new In("query.txt");
+        while (!qin.isEmpty()) {
+            var s = qin.readInt();
+            var t = qin.readInt();
             var aStar = new AStar(map, s, t);
             var path = aStar.shortestPath();
-            String filename = new StringBuilder()
-                    .append("path-")
-                    .append(s)
-                    .append("-")
-                    .append(t)
-                    .append(".png")
-                    .toString();
-            map.draw(path, filename);
+            if (path == null) {
+                System.out.println("No path");
+            } else {
+                System.out.println("Path found");
+            }
+            // String filename = new StringBuilder()
+            //         .append("path-")
+            //         .append(s)
+            //         .append("-")
+            //         .append(t)
+            //         .append(".png")
+            //         .toString();
+            // map.draw(path, filename);
         }
     }
 }

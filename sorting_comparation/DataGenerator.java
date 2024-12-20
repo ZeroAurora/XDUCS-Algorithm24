@@ -5,9 +5,8 @@ public class DataGenerator {
         int n = Integer.parseInt(args[0]);
         int[] a = new int[n];
         for (int i = 0; i < n; i++) {
-            a[i] = i;
+            a[i] = StdRandom.uniformInt(n);
         }
-        StdRandom.shuffle(a);
         show(a);
     }
 

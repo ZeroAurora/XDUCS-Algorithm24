@@ -53,7 +53,7 @@ public class AStar {
         }
         return path;   
     }
-
+    
     private void relax(Edge e, int v) {
         int w = e.other(v);
         if (distTo[w] > distTo[v] + e.weight() + heuristic(v, w)) {
@@ -67,6 +67,9 @@ public class AStar {
         }
     }
 
+    // when path v->w makes the euclidean distance to terminal shorter,
+    // this function returns a negative value, which makes distTo[w] smaller.
+    // effectively, the function makes the search more heuristic.
     private double heuristic(int v, int w) {
         return M.dist(w, t) - M.dist(v, t);
     }
