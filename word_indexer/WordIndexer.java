@@ -59,6 +59,10 @@ public class WordIndexer {
         var end = System.currentTimeMillis();
         StdOut.println("Index time taken: " + (end - start) + " ms");
 
+        System.gc();
+        long usedMem = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        StdOut.println("Memory used: " + usedMem / 1024 + " KB");
+
         start = System.currentTimeMillis();
         String query = args[1];
         var qin = new In(query);
